@@ -9,7 +9,8 @@ namespace UNO_WinForms
     {
         public Dealer()
         {
-
+            players = new List<Player>();
+            pile = new Stack<Card>();
 
             // составляем колоду
             List<Card> items = new List<Card>();

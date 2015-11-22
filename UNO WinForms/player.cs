@@ -9,7 +9,8 @@ namespace UNO_WinForms
     {
         public Player()
         {
-            
+            hand = new List<Card>();
+            cardsToPlay = new List<Card>();
         }
 
         public void simpr_talking()

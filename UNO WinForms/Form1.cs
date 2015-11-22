@@ -25,13 +25,13 @@ namespace UNO_WinForms
             bool forward = false; // направление игры
             while (!dealer.gameFinished())
             {
-                MyHookClass mhk = new MyHookClass(this);
-                Card selectedCard = players[number].play_card(pile.Peek());
+                //MyHookClass mhk = new MyHookClass(this);
+                Card selectedCard = dealer.players[number].play_card(dealer.pile.Peek());
                 // игрок не сыграл карту -> берёт карту из колоды
                 if (selectedCard == null)
                 {
-                    players[number].hand.Add(deck.Peek());
-                    deck.Pop();
+                    dealer.players[number].hand.Add(dealer.deck.Peek());
+                    dealer.deck.Pop();
                 }
                 // игрок сыграл карту
                 if (selectedCard != null)
@@ -39,7 +39,7 @@ namespace UNO_WinForms
                     switch (selectedCard.value)
                     {
                         case Values.Skip:
-                            number = pass_course(forward, number);
+                            number = dealer.pass_course(forward, number);
                             break;
                         case Values.Reverse:
                             // играем в другую сторону
@@ -47,12 +47,12 @@ namespace UNO_WinForms
                             break;
                         case Values.DrawTwo:
                             // следующий игрок пропускает ход
-                            number = pass_course(forward, number);
+                            number = dealer.pass_course(forward, number);
                             // и берёт две карты
-                            players[number].hand.Add(deck.Peek());
-                            deck.Pop();
-                            players[number].hand.Add(deck.Peek());
-                            deck.Pop();
+                            dealer.players[number].hand.Add(dealer.deck.Peek());
+                            dealer.deck.Pop();
+                            dealer.players[number].hand.Add(dealer.deck.Peek());
+                            dealer.deck.Pop();
                             break;
                         case Values.Wild:
                             break;
@@ -61,10 +61,10 @@ namespace UNO_WinForms
                         default:
                             break;
                     }
-                    pile.Push(selectedCard);
-                    players[number].hand.Remove(selectedCard);
+                    dealer.pile.Push(selectedCard);
+                    dealer.players[number].hand.Remove(selectedCard);
                 }
-                number = pass_course(forward, number);
+                number = dealer.pass_course(forward, number);
             }
         }
 
