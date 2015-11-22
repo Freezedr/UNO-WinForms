@@ -15,6 +15,59 @@ namespace UNO_WinForms
         public Form1()
         {
             InitializeComponent();
+            dealer = new Dealer();
+            play();
         }
+
+        public void play()
+        {
+            int number = 0;  // порядковый номер игрока
+            bool forward = false; // направление игры
+            while (!dealer.gameFinished())
+            {
+                MyHookClass mhk = new MyHookClass(this);
+                Card selectedCard = players[number].play_card(pile.Peek());
+                // игрок не сыграл карту -> берёт карту из колоды
+                if (selectedCard == null)
+                {
+                    players[number].hand.Add(deck.Peek());
+                    deck.Pop();
+                }
+                // игрок сыграл карту
+                if (selectedCard != null)
+                {
+                    switch (selectedCard.value)
+                    {
+                        case Values.Skip:
+                            number = pass_course(forward, number);
+                            break;
+                        case Values.Reverse:
+                            // играем в другую сторону
+                            forward = false;
+                            break;
+                        case Values.DrawTwo:
+                            // следующий игрок пропускает ход
+                            number = pass_course(forward, number);
+                            // и берёт две карты
+                            players[number].hand.Add(deck.Peek());
+                            deck.Pop();
+                            players[number].hand.Add(deck.Peek());
+                            deck.Pop();
+                            break;
+                        case Values.Wild:
+                            break;
+                        case Values.WildFour:
+                            break;
+                        default:
+                            break;
+                    }
+                    pile.Push(selectedCard);
+                    players[number].hand.Remove(selectedCard);
+                }
+                number = pass_course(forward, number);
+            }
+        }
+
+        public Dealer dealer;
     }
 }

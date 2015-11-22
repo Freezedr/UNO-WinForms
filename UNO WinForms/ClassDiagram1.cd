@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="UNO_Console.Dealer">
+  <Class Name="UNO_WinForms.Dealer">
     <Position X="5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAEgAAAAAAAAAAAAAQAAAAAEAAIAAAAAAAAAA=</HashCode>
       <FileName>Dealer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="UNO_Console.Player">
+  <Class Name="UNO_WinForms.Player">
     <Position X="3" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAABBgAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>player.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="UNO_Console.Card">
+  <Class Name="UNO_WinForms.Card">
     <Position X="1" Y="0.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
@@ -24,7 +24,7 @@
       <FileName>Card.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WindowsApplication4.MyHookClass" Collapsed="true">
+  <Class Name="UNO_WinForms.MyHookClass" Collapsed="true">
     <Position X="0.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAAAAQAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>

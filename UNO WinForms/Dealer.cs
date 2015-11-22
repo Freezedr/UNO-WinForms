@@ -9,6 +9,8 @@ namespace UNO_WinForms
     {
         public Dealer()
         {
+
+
             // составляем колоду
             List<Card> items = new List<Card>();
 
@@ -57,82 +59,6 @@ namespace UNO_WinForms
            
             // раздаём карты игрокам
             init_hands();
-
-            // кладём верхнюю карту колоды в бито
-            Card first_card = deck.Peek();
-            // но она не должна быть "дикой"
-            if (first_card.colour == Colours.Wild)
-            {
-                bool legalStart = false;
-                while (!legalStart)
-                {
-                    int rand = RND.Next(items.Count);
-                    deck.Pop();
-                    Stack<Card> tmpList = new Stack<Card>();
-                    for (int i = 0; i < rand; i++)
-                    {
-                        Card tempCard = deck.Peek();
-                        deck.Pop();
-                        tmpList.Push(tempCard);
-                    }
-                    first_card = deck.Peek();
-                    if (first_card.colour != Colours.Wild)
-                        legalStart = true;
-                    else
-                        tmpList.Clear();
-                }
-            }
-
-            pile.Push(first_card);
-            
-            // GO!!!
-            // TODO: перенести игру из конструктора дилера
-            //       он только подготавливает игру и раздаёт штрафы игрокам
-
-            int number = 0;  // порядковый номер игрока
-            bool forward = false; // направление игры
-            while (!gameFinished())
-            {
-                Card selectedCard = players[number].play_card(pile.Peek());
-                // игрок не сыграл карту -> берёт карту из колоды
-                if (selectedCard == null)
-                {
-                    players[number].hand.Add(deck.Peek());
-                    deck.Pop();
-                }
-                // игрок сыграл карту
-                if (selectedCard != null)
-                {
-                    switch (selectedCard.value)
-                    {
-                        case Values.Skip:
-                            number = pass_course(forward, number);    
-                            break;
-                        case Values.Reverse:
-                            // играем в другую сторону
-                            forward = false;
-                            break;
-                        case Values.DrawTwo:
-                            // следующий игрок пропускает ход
-                            number = pass_course(forward, number);
-                            // и берёт две карты
-                            players[number].hand.Add(deck.Peek());
-                            deck.Pop();
-                            players[number].hand.Add(deck.Peek());
-                            deck.Pop();
-                            break;
-                        case Values.Wild:
-                            break;
-                        case Values.WildFour:
-                            break;
-                        default:
-                            break;
-                    }
-                    pile.Push(selectedCard);
-                    players[number].hand.Remove(selectedCard);
-                }
-                number = pass_course(forward,number);    
-            }
             
         }
 
@@ -165,6 +91,34 @@ namespace UNO_WinForms
                     deck.Pop();
                 }
             }
+
+            // кладём верхнюю карту колоды в бито
+            Card first_card = deck.Peek();
+            // но она не должна быть "дикой"
+            if (first_card.colour == Colours.Wild)
+            {
+                bool legalStart = false;
+                while (!legalStart)
+                {
+                    Random RND = new Random();
+                    int rand = RND.Next(deck.Count);
+                    deck.Pop();
+                    Stack<Card> tmpList = new Stack<Card>();
+                    for (int i = 0; i < rand; i++)
+                    {
+                        Card tempCard = deck.Peek();
+                        deck.Pop();
+                        tmpList.Push(tempCard);
+                    }
+                    first_card = deck.Peek();
+                    if (first_card.colour != Colours.Wild)
+                        legalStart = true;
+                    else
+                        tmpList.Clear();
+                }
+            }
+
+            pile.Push(first_card);
         }
         
         public int pass_course(bool forward, int number)
