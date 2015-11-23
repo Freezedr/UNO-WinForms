@@ -14,11 +14,9 @@ namespace UNO_WinForms
     {
         public Form1()
         {
+            file = new System.IO.StreamWriter("log.txt");
+            mhk = new MyHookClass(this);
             InitializeComponent();
-            dealer = new Dealer();
-            s_pilecolour = "pileColourCards";
-            s_cardstoplay = "cardstoplay";
-            play();
         }
 
         public void play()
@@ -27,10 +25,12 @@ namespace UNO_WinForms
             bool forward = false; // направление игры
             while (!dealer.gameFinished())
             {
+                if (dealer.deck.Count == 0)
+                    dealer.pileToDeck();
                 dealer.players[number].cardsToPlay_init(dealer.pile.Peek());
                 mhk = new MyHookClass(this);
                 Card selectedCard = mhk.selectedCard;
-                    
+                richTextBox1.Text += "player " + number.ToString() + " card: " + selectedCard.ToString();
                 // игрок не сыграл карту -> берёт карту из колоды
                 if (selectedCard == null)
                 {
@@ -72,10 +72,49 @@ namespace UNO_WinForms
             }
         }
 
+        public void printDeck()
+        {
+            file.Write("Game deck: \n\n");
+            for (int i = 0; i < dealer.deck.Count; i++)
+            {
+                Card curr = dealer.deck.ElementAt<Card>(i);
+                file.Write(curr.ToString() + "\n");
+            }
+            file.Write("\n");
+            //file.Close();
+        }
+
+        public void printHands()
+        {
+            for (int i = 0; i < dealer.players.Count; i++)
+            {
+                file.Write("\nPlayer " + i + " hand: \n\n");
+                file.Write(dealer.players[i].hand.Count.ToString() + "\n");
+                for (int j = 0; j < dealer.players[i].hand.Count; j++)
+                {
+                    Card curr = dealer.players[i].hand.ElementAt<Card>(j);
+                    file.Write(curr.ToString() + "\n");
+                }
+            }
+            file.Write("\n");
+            file.Close();
+        }
+
         public int number;
         public Dealer dealer;
         public MyHookClass mhk;
         public string s_pilecolour;
-        public string s_cardstoplay; 
+        public string s_cardstoplay;
+        public System.IO.StreamWriter file;
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dealer = new Dealer();
+            s_pilecolour = "pileColourCards";
+            s_cardstoplay = "cardstoplay";
+            printDeck();
+            printHands();
+            //play();
+        } 
     }
 }

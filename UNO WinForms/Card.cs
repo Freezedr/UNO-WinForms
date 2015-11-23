@@ -19,6 +19,11 @@ namespace UNO_WinForms
 
         }
 
+        public override string ToString()
+        {
+            return colour.ToString() + " " + value.ToString();
+        }
+
         public Colours colour;
         public Values value;
     }

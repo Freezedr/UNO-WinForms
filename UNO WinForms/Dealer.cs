@@ -40,12 +40,15 @@ namespace UNO_WinForms
                 card.value = Values.Zero;
                 items.Add(card); 
                 // дикие карты "заказать цвет"
-                card.colour = Colours.Wild;
-                card.value = Values.Wild;
-                items.Add(card);
+                Card wild1 = new Card();
+                wild1.colour = Colours.Wild;
+                wild1.value = Values.Wild;
+                items.Add(wild1);
                 // дикие карты "+4"
-                card.value = Values.WildFour;
-                items.Add(card);
+                Card wild2 = new Card();
+                wild2.value = Values.WildFour;
+                wild2.colour = Colours.Wild;
+                items.Add(wild2);
             }
 
             // перемешиваем колоду
@@ -57,7 +60,9 @@ namespace UNO_WinForms
                 items.Insert(RND.Next(items.Count), tmp);
             }
             deck = new Stack<Card>(items);
-           
+
+            //printDeck();
+
             // раздаём карты игрокам
             init_hands();
             
@@ -77,20 +82,38 @@ namespace UNO_WinForms
         public void init_hands()
         {
             Player player = new Player();
-
-            for (int i = 0; i < 4; i++)
-            {
-                players.Add(player);    
-            }
+            players.Add(player);
+            Player player1 = new Player();
+            players.Add(player1);
+            Player player2 = new Player();
+            players.Add(player2);
+            Player player3 = new Player();
+            players.Add(player3);
+            
                         
             // каждому игроку даём по семь карт
             for (int i = 0; i < 7; i++)
             {
-                for (int j = 0; j < players.Count; j++)
-                {
-                    players[j].hand.Add(deck.Peek());
-                    deck.Pop();
-                }
+                    Card card = deck.Pop();
+                    players[0].hand.Add(card);                    
+            }
+
+            for (int i = 0; i < 7; i++)
+            {
+                Card card = deck.Pop();
+                players[1].hand.Add(card);
+            }
+
+            for (int i = 0; i < 7; i++)
+            {
+                Card card = deck.Pop();
+                players[2].hand.Add(card);
+            }
+            
+            for (int i = 0; i < 7; i++)
+            {
+                Card card = deck.Pop();
+                players[3].hand.Add(card);
             }
 
             // кладём верхнюю карту колоды в бито
@@ -132,8 +155,30 @@ namespace UNO_WinForms
             return number-- % 4;  
         }
 
+        public void pileToDeck()
+        {
+            while (pile.Count != 0)
+            {
+                Card item = pile.Pop();
+                deck.Push(item);
+            }
+        }
+
+        //public void printDeck()
+        //{
+        //    file.Write("Game deck: \n\n");
+        //    for (int i = 0; i < deck.Count; i++)
+        //    {
+        //        Card curr = deck.ElementAt<Card>(i);
+        //        file.Write(curr.ToString() + "\n");
+        //    }
+        //    file.Write("\n");
+        //    //file.Close();
+        //}
+
         public Stack<Card> deck; // колода
         public Stack<Card> pile; // сыгранные карты (бито)
         public List<Player> players;
+        public System.IO.StreamWriter file;
     }
 }

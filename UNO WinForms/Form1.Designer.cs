@@ -28,49 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // flowLayoutPanel1
+            // button1
             // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(211, 326);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(380, 124);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.button1.Location = new System.Drawing.Point(243, 165);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // flowLayoutPanel3
+            // richTextBox1
             // 
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(692, 130);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(124, 208);
-            this.flowLayoutPanel3.TabIndex = 2;
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(12, 130);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(124, 208);
-            this.flowLayoutPanel4.TabIndex = 3;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(300, 12);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(208, 124);
-            this.flowLayoutPanel2.TabIndex = 4;
+            this.richTextBox1.Location = new System.Drawing.Point(12, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(161, 174);
+            this.richTextBox1.TabIndex = 6;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 462);
-            this.Controls.Add(this.flowLayoutPanel2);
-            this.Controls.Add(this.flowLayoutPanel4);
-            this.Controls.Add(this.flowLayoutPanel3);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(332, 198);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -79,10 +65,8 @@
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
