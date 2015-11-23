@@ -147,12 +147,28 @@ namespace UNO_WinForms
         
         public int pass_course(bool forward, int number)
         {
-            if (forward)
-                return number++ % 4;
-            if (!forward && (number == 0) )
-                return 3;
+            if (forward && number < 3)
+            {
+                number++;
+                return number;
+            }
+            if (forward && number == 3)
+            {
+                number = 0;
+                return number;
+            }
+            if (!forward && number > 0)
+            {
+                number--;
+                return number;
+            }
+            if (!forward && number == 0)
+            {
+                number = 3;
+                return number;
+            }
+            return number;
 
-            return number-- % 4;  
         }
 
         public void pileToDeck()

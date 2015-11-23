@@ -41,8 +41,7 @@ namespace UNO_WinForms // не забудьте поменять на свой n
             simpr = RegisterWindowMessage("MyMessage"); // регистрируем своё сообщение
             this.AssignHandle(hWnd);
             currentSet = f.s_cardstoplay;
-            // solv = new solver(); // пример создания элемента класса "решателя"
-
+            
         }
 
         public MyHookClass(Form1 af)
@@ -55,7 +54,7 @@ namespace UNO_WinForms // не забудьте поменять на свой n
         protected override void WndProc(ref Message m) // в эту функцию приходят все сообщения от СИМПРА
         {
 
-            int i = 0, wparamhi, wparamlo, wparam;
+            int wparamhi, wparamlo, wparam;
             int lParam = Convert.ToInt32("" + m.LParam);
 
             if (m.Msg == simpr)
@@ -195,9 +194,6 @@ namespace UNO_WinForms // не забудьте поменять на свой n
                             case 4:
                                 selectedCard = f.dealer.players[f.number].play_card(Values.WildFour, currentSet);
                                 break;
-                            case 5:
-                                // вызов второй таблицы
-                                break;
                             default:
                                 break;
                         }
@@ -262,7 +258,7 @@ namespace UNO_WinForms // не забудьте поменять на свой n
                     }
 
                     Application.DoEvents();
-                    Thread.Sleep(300); // если у нас есть визуальное отображение, то задержку можно установить здесь                    
+                    Thread.Sleep(3000); // если у нас есть визуальное отображение, то задержку можно установить здесь                    
                     m.Result = new IntPtr(1); // ответом на запрос действия со стороны СИМПР должна быть единица
                 }
                 #endregion

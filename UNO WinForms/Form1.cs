@@ -30,7 +30,7 @@ namespace UNO_WinForms
                 dealer.players[number].cardsToPlay_init(dealer.pile.Peek());
                 mhk = new MyHookClass(this);
                 Card selectedCard = mhk.selectedCard;
-                richTextBox1.Text += "player " + number.ToString() + " card: " + selectedCard.ToString();
+                //richTextBox1.Text += "player " + number.ToString() + " card: " + selectedCard.ToString();
                 // игрок не сыграл карту -> берёт карту из колоды
                 if (selectedCard == null)
                 {
@@ -114,7 +114,7 @@ namespace UNO_WinForms
             s_cardstoplay = "cardstoplay";
             printDeck();
             printHands();
-            //play();
+            play();
         } 
     }
 }
