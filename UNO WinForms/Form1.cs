@@ -16,17 +16,21 @@ namespace UNO_WinForms
         {
             InitializeComponent();
             dealer = new Dealer();
+            s_pilecolour = "pileColourCards";
+            s_cardstoplay = "cardstoplay";
             play();
         }
 
         public void play()
         {
-            int number = 0;  // порядковый номер игрока
+            number = 0;  // порядковый номер игрока
             bool forward = false; // направление игры
             while (!dealer.gameFinished())
             {
-                //MyHookClass mhk = new MyHookClass(this);
-                Card selectedCard = dealer.players[number].play_card(dealer.pile.Peek());
+                dealer.players[number].cardsToPlay_init(dealer.pile.Peek());
+                mhk = new MyHookClass(this);
+                Card selectedCard = mhk.selectedCard;
+                    
                 // игрок не сыграл карту -> берёт карту из колоды
                 if (selectedCard == null)
                 {
@@ -68,6 +72,10 @@ namespace UNO_WinForms
             }
         }
 
+        public int number;
         public Dealer dealer;
+        public MyHookClass mhk;
+        public string s_pilecolour;
+        public string s_cardstoplay; 
     }
 }
