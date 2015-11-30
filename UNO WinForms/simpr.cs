@@ -33,27 +33,21 @@ namespace UNO_WinForms // не забудьте поменять на свой n
 
         uint simpr;
         Form1 f;
-        public Card selectedCard;
+        public Game g;
         public string currentSet;
-        
-        public MyHookClass(IntPtr hWnd)
-        {
-            simpr = RegisterWindowMessage("MyMessage"); // регистрируем своё сообщение
-            this.AssignHandle(hWnd);
-            currentSet = f.s_cardstoplay;
-            
-        }
+        public bool fl;
 
         public MyHookClass(Form1 af)
         {
             simpr = RegisterWindowMessage("MyMessage");
             this.AssignHandle(af.Handle);
-            f = af;
+            g = new Game();
+            fl = false;
+            currentSet = g.s_cardstoplay;
         }
 
         protected override void WndProc(ref Message m) // в эту функцию приходят все сообщения от СИМПРА
         {
-
             int wparamhi, wparamlo, wparam;
             int lParam = Convert.ToInt32("" + m.LParam);
 
@@ -63,113 +57,131 @@ namespace UNO_WinForms // не забудьте поменять на свой n
                 wparam = Convert.ToInt32("" + m.WParam);
                 wparamhi = wparam / 65536;
                 wparamlo = wparam - wparamhi * 65536;
-                int index = f.number;
+                int index = g.number;
 
                 #region conditions
                 if (wparamhi == 0)//условия
                 {
-                    if (wparamlo == 1)// таблица 1 
+                    if (wparamlo == 2)// таблица 1 
                     {
+                        g.print("Таблица 2, условия");
                         switch (lParam)
                         {
                             case 1: // У соперника Б одна карта?
-                                index = f.dealer.pass_course(true, index);
-                                m.Result = f.dealer.players[index].isOneCard(); 
+                                index = g.dealer.pass_course(true, index);
+                                m.Result = g.dealer.players[index].isOneCard();
+                                //f.richtextBox1.Text += "СИМПР: У соперника Б одна карта?";
                                 break;
                             case 2: // У соперника В одна карта?
-                                index = f.dealer.pass_course(true, index);
-                                index = f.dealer.pass_course(true, index);
-                                m.Result = f.dealer.players[index].isOneCard(); 
+                                index = g.dealer.pass_course(true, index);
+                                index = g.dealer.pass_course(true, index);
+                                m.Result = g.dealer.players[index].isOneCard();
+                                //f.richtextBox1.Text += "СИМПР: У соперника В одна карта?";
                                 break;
                             case 3: // У соперника Б меньше 4 карт?
-                                index = f.dealer.pass_course(true, index);
-                                m.Result = f.dealer.players[index].isLessFourCard();
+                                index = g.dealer.pass_course(true, index);
+                                m.Result = g.dealer.players[index].isLessFourCard();
+                                //f.richtextBox1.Text += "СИМПР: У соперника Б меньше 4 карт?";
                                 break;
                             case 4: // У соперника А меньше 4 карт?
-                                index = f.dealer.pass_course(false, index);
-                                m.Result = f.dealer.players[index].isLessFourCard();
+                                index = g.dealer.pass_course(false, index);
+                                m.Result = g.dealer.players[index].isLessFourCard();
+                                //f.richtextBox1.Text += "СИМПР: У соперника А меньше 4 карт?";
                                 break;
                             case 5: // Есть в руке "пропуск хода"?
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Skip); 
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Skip);
+                                //f.richtextBox1.Text += "СИМПР: Есть в руке 'пропуск хода'?";
                                 break;
                             case 6: // Есть в руке "разворот"?
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Reverse);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Reverse);
+                                //f.richtextBox1.Text += "СИМПР: Есть в руке 'разворот'?"; 
                                 break;
                             case 7: // Есть в руке "+2"?
-                                m.Result = f.dealer.players[f.number].hasCard(Values.DrawTwo);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.DrawTwo);
+                                //f.richtextBox1.Text += "СИМПР: Есть в руке '+2'?"; 
                                 break;
                             case 8: // Есть в руке "+4"?
-                                m.Result = f.dealer.players[f.number].hasCard(Values.WildFour);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.WildFour);
+                                //f.richtextBox1.Text += "СИМПР: Есть в руке '+4'?"; 
                                 break;
                             default:
                                 break;
                         }
-                        
-                        //if (lParam == 1)// таблица 1 условие 1
-                        //{
-                        //    m.Result = new IntPtr(1); // вернуть условие 1 = TRUE
-                        //}
-                        //else if (lParam == 2)// таблица 1 условие 2
-                        //{
-                        //    m.Result = new IntPtr(0); // вернуть условие 2 = FALSE
-                        //}
+                        fl = false;  // СИМПР не сделал ещё свой выбор
                     }
-                    else if (wparamlo == 2)// таблица 2 
+                    else if (wparamlo == 3)// таблица 2 
                     {
+                        g.print("Таблица 3, условия");
                         switch (lParam)
                         {
                             case 1: // Есть в руке карта "пропуск хода"?
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Skip);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Skip);
                                 break;
                             case 2: // Есть в руке карта "разворот"?
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Reverse);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Reverse);
                                 break;
                             case 3: // Есть в руке карта "+2"?
-                                m.Result = f.dealer.players[f.number].hasCard(Values.DrawTwo);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.DrawTwo);
                                 break;
                             case 4: // Есть в руке карта "+4"?
-                                m.Result = f.dealer.players[f.number].hasCard(Values.WildFour);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.WildFour);
                                 break;
                             case 5: // Есть в руке карта "заказать цвет"?
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Wild);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Wild);
                                 break;
                             case 6: 
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Nine);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Nine);
                                 break;
                             case 7: 
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Eight);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Eight);
                                 break;
                             case 8: 
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Seven);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Seven);
                                 break;
                             case 9:
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Six);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Six);
                                 break;
                             case 10: 
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Five);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Five);
                                 break;
                             case 11: 
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Four);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Four);
                                 break;
                             case 12: 
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Three);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Three);
                                 break;
                             case 13: 
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Two); 
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Two); 
                                 break;
                             case 14: 
-                                m.Result = f.dealer.players[f.number].hasCard(Values.One);
+                                m.Result = g.dealer.players[g.number].hasCard(Values.One);
                                 break;
                             case 15: 
-                                m.Result = f.dealer.players[f.number].hasCard(Values.Zero); 
+                                m.Result = g.dealer.players[g.number].hasCard(Values.Zero); 
                                 break;
                             case 16: // Есть карты такого же цвета, как сейчас в игре?
-                                Colours pileColor = f.dealer.pile.Peek().colour;
-                                m.Result = f.dealer.players[f.number].isPileColour(pileColor);
+                                Colours pileColor = g.dealer.pile.Peek().colour;
+                                m.Result = g.dealer.players[g.number].isPileColour(pileColor);
                                 break;
                             default: break;
                         }
+                        fl = false;
                     }
+                    else if (wparamlo == 1)
+                    {
+                        g.print("Таблица 1, условия");
+                        switch (lParam)
+                        {
+                            case 1:
+                                if (fl)
+                                    m.Result = new IntPtr(1);    
+                                m.Result = new IntPtr(0);
+                                break;
+                            default:
+                                break;
+                        } 
+                    }
+                    
                 }
                 #endregion
 
@@ -177,89 +189,127 @@ namespace UNO_WinForms // не забудьте поменять на свой n
                 else if (wparamhi == 1)//действия
                 {
                     
-                    if (wparamlo == 1)// таблица 1 
+                    if (wparamlo == 2)// таблица 1 
                     {
-                        selectedCard = new Card();
+                       g.print("Таблица 2, действия");
                         switch (lParam)
                         {
                             case 1:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Skip, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Skip, currentSet);
+                                fl = true;
                                 break;
                             case 2:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Reverse, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Reverse, currentSet);
+                                fl = true;
                                 break;
                             case 3:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.DrawTwo, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.DrawTwo, currentSet);
+                                fl = true;
                                 break;
                             case 4:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.WildFour, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.WildFour, currentSet);
+                                fl = true;
                                 break;
                             default:
                                 break;
                         }
                     }
-                    else if (wparamlo == 2)// таблица 2 
+                    else if (wparamlo == 3)// таблица 2 
                     {
+                       g.print("Таблица 3, действия");
                         switch (lParam)
                         {
                             case 1: // Играть карту "разворот"
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Skip, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Skip, currentSet);
+                                fl = true;
                                 break;
                             case 2: // Играть карту "разворот"
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Reverse, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Reverse, currentSet);
+                                fl = true;
                                 break;
                             case 3: // Играть карту "+2"
-                                selectedCard = f.dealer.players[f.number].play_card(Values.DrawTwo, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.DrawTwo, currentSet);
+                                fl = true;
                                 break;
                             case 4: // Играть карту "+4"
-                                selectedCard = f.dealer.players[f.number].play_card(Values.WildFour, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.WildFour, currentSet);
+                                fl = true;
                                 break;
                             case 5: // Играть карту "заказать цвет"
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Wild, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Wild, currentSet);
+                                fl = true;
                                 break;
                             case 6:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Nine, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Nine, currentSet);
+                                fl = true;
                                 break;
                             case 7:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Eight, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Eight, currentSet);
+                                fl = true;
                                 break;
                             case 8:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Seven, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Seven, currentSet);
+                                fl = true;
                                 break;
                             case 9:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Six, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Six, currentSet);
+                                fl = true;
                                 break;
                             case 10:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Five, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Five, currentSet);
+                                fl = true;
                                 break;
                             case 11:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Four, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Four, currentSet);
+                                fl = true;
                                 break;
                             case 12:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Three, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Three, currentSet);
+                                fl = true;
                                 break;
                             case 13:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Two, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Two, currentSet);
+                                fl = true;
                                 break;
                             case 14:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.One, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.One, currentSet);
+                                fl = true;
                                 break;
                             case 15:
-                                selectedCard = f.dealer.players[f.number].play_card(Values.Zero, currentSet);
+                                Data.selectedCard = g.dealer.players[g.number].play_card(Values.Zero, currentSet);
+                                fl = true;
                                 break;
                             case 16: // Есть карты такого же цвета, как сейчас в игре?
-                                currentSet = f.s_pilecolour;
+                                currentSet = g.s_pilecolour;
                                 break;
                             case 17:
+                                Data.selectedCard = null;
+                                fl = true;
                                 break;
                             default: break;
 
                         }
+                        
+                    }
+                    else if (wparamlo == 1)// таблица 3
+                    {
+                        g.print("Таблица 1, действия");
+                        switch (lParam)
+                        {
+                            case 1:
+                                fl = false;
+                                break;
+                            case 2:
+                                fl = true;
+                                break;
+                            default:
+                                break;
+                        }
                     }
 
                     Application.DoEvents();
-                    Thread.Sleep(3000); // если у нас есть визуальное отображение, то задержку можно установить здесь                    
-                    m.Result = new IntPtr(1); // ответом на запрос действия со стороны СИМПР должна быть единица
+                    //Thread.Sleep(1000); // если у нас есть визуальное отображение, то задержку можно установить здесь                    
+                    m.Result = new IntPtr(1); // ответом на запрос действия со стороны СИМПР должна быть 
                 }
                 #endregion
             }

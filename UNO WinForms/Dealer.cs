@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace UNO_WinForms
 {
@@ -28,7 +29,10 @@ namespace UNO_WinForms
                     card.colour = (Colours)i;
                     card.value = j;
                     items.Add(card);
-                    items.Add(card);
+                    Card card1= new Card();
+                    card1.colour = (Colours)i;
+                    card1.value = j;
+                    items.Add(card1);
                 }
             }
             // добавляем в колоду остальные карты
@@ -74,7 +78,11 @@ namespace UNO_WinForms
             for (int i = 0; i < players.Count; i++)
             {
                 if (players[i].hand.Count == 0)
+                {
+                    MessageBox.Show("GAME!!!");
                     return true;
+                }
+                    
             }
             return false;
         }

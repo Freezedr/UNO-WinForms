@@ -1,0 +1,128 @@
+Game deck: 
+
+Yellow Skip
+Wild WildFour
+Yellow Four
+Wild Wild
+Red Zero
+Red Reverse
+Blue Four
+Green DrawTwo
+Green DrawTwo
+Green Reverse
+Green Reverse
+Green Skip
+Green Skip
+Yellow Two
+Yellow Three
+Yellow Seven
+Yellow Six
+Green Nine
+Red Eight
+Blue One
+Green Nine
+Red Five
+Yellow Three
+Green Eight
+Yellow Five
+Red Eight
+Green Eight
+Yellow DrawTwo
+Yellow Seven
+Yellow Two
+Green Seven
+Green Seven
+Yellow One
+Green Six
+Green Six
+Green Five
+Red One
+Red Five
+Yellow Six
+Green Five
+Green Four
+Yellow Skip
+Blue Seven
+Green Four
+Blue Five
+Red One
+Red Nine
+Red DrawTwo
+Green Three
+Green Three
+Yellow Reverse
+Green Two
+Yellow Five
+Green Two
+Red DrawTwo
+Green One
+Green One
+Red Reverse
+Yellow Eight
+Red Nine
+Red Skip
+Blue DrawTwo
+Blue DrawTwo
+Red Six
+Blue Seven
+Blue Reverse
+Blue Reverse
+Blue Three
+Blue Four
+Blue Skip
+Red Two
+Blue Two
+Red Three
+Blue Skip
+Blue Nine
+Blue Nine
+Blue Six
+Red Three
+Blue Eight
+Blue Eight
+
+
+Player 0 hand: 
+
+7
+Wild WildFour
+Blue Six
+Yellow Reverse
+Wild Wild
+Red Skip
+Yellow Nine
+Green Zero
+
+Player 1 hand: 
+
+7
+Wild WildFour
+Wild Wild
+Yellow Four
+Yellow Nine
+Red Seven
+Red Two
+Red Seven
+
+Player 2 hand: 
+
+7
+Yellow One
+Blue Five
+Blue Zero
+Blue Three
+Yellow DrawTwo
+Wild WildFour
+Red Four
+
+Player 3 hand: 
+
+7
+Blue One
+Wild Wild
+Red Four
+Red Six
+Yellow Eight
+Blue Two
+Yellow Zero
+

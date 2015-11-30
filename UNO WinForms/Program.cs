@@ -17,9 +17,18 @@ namespace UNO_WinForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Data.selectedCard = new Card();
+            Data.selectedCard.colour = Colours.Blue;
+            Data.selectedCard.value = Values.One;
             Application.Run(new Form1());
         }
         
+    }
+
+    static class Data
+    {
+        public static Card selectedCard;
+        public static string str_buf;
     }
 
     
