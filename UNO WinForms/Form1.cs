@@ -24,6 +24,6 @@ namespace UNO_WinForms
         private void button1_Click(object sender, EventArgs e)
         {
             mhk.g.play(this);
-        } 
+        }
     }
 }

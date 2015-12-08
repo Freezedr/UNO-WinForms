@@ -8,21 +8,6 @@ namespace UNO_WinForms // не забудьте поменять на свой n
 
     public class MyHookClass : NativeWindow
     {
-        //
-        //   Класс работы с сообщениями.
-        //   Автор: Кузнецов Андрей (А-16-05)
-        //
-        //   Примечание: для выполнение действий в этом классе рекомендуется создать 
-        //   элемент класса, который используется для работы основной программы 
-        //   например: public solver solv; // в объявлениях
-        //   тогда в WndProc доступ к функциям будет как solv.function(...)
-        //   а доступ из основной программы(с формы) к значеним и функциям решателя
-        //   будет осуществлён так:
-        //   MyHookClass hook; // в пространстве имён формы
-        //   hook= new MyHookClass(); // в инициализаторе формы
-        //   hook.solv.function(...); // доступ к значениям и функциям (например из таймера, для обновления графики)
-        //   
-        //  
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         static extern uint RegisterWindowMessage(string lpString);
