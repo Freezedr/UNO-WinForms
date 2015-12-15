@@ -188,18 +188,6 @@ namespace UNO_WinForms
             }
         }
 
-        //public void printDeck()
-        //{
-        //    file.Write("Game deck: \n\n");
-        //    for (int i = 0; i < deck.Count; i++)
-        //    {
-        //        Card curr = deck.ElementAt<Card>(i);
-        //        file.Write(curr.ToString() + "\n");
-        //    }
-        //    file.Write("\n");
-        //    //file.Close();
-        //}
-
         public Stack<Card> deck; // колода
         public Stack<Card> pile; // сыгранные карты (бито)
         public List<Player> players;

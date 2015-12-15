@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Runtime.InteropServices;
 
-namespace UNO_WinForms // не забудьте поменять на свой namespace //
+namespace UNO_WinForms
 {
 
     public class MyHookClass : NativeWindow
@@ -11,10 +11,6 @@ namespace UNO_WinForms // не забудьте поменять на свой n
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         static extern uint RegisterWindowMessage(string lpString);
-
-
-        //public solver solv; // - пример включения класса "решателя"
-
 
         uint simpr;
         Form1 f;
@@ -302,8 +298,6 @@ namespace UNO_WinForms // не забудьте поменять на свой n
             {
                 base.WndProc(ref m); // для всех действий не связанных с СИМПР возвращаем управление программе
             }
-
-
 
         }
 

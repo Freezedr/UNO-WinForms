@@ -24,20 +24,26 @@ namespace UNO_WinForms
         {
             number = 0;  // порядковый номер игрока
             bool forward = true; // направление игры
+            // отрисовка игровой ситуации
             f.paint_position();
             MessageBox.Show("Включите СИМПР");
+            // очистка игрового поля для новых положений
             f.clear_position();
             f.richTextBox1.Text += "Pile card: " + dealer.pile.Peek().ToString() + '\n';
+            // играем
             while (!dealer.gameFinished())
             {
                 f.paint_position();
+                
+                // если закончилась игровая колода - переворачиваем бито
                 if (dealer.deck.Count == 0)
                     dealer.pileToDeck();
                 if ((dealer.deck.Count == 0) || (dealer.pile.Count == 0))
-                {
                     return;
-                }
+                
+                // составление множества карт, из которых можно сыграть 
                 dealer.players[number].cardsToPlay_init(dealer.pile.Peek());
+                // игрок советуется с СИМПР
                 while (!f.mhk.fl)
                 {
                     Application.DoEvents();
@@ -76,25 +82,29 @@ namespace UNO_WinForms
                             dealer.deck.Pop();
                             break;
                         case Values.Wild:
+                            // случайным образом задаётся цвет
                             selectedCard.colour = (Colours)RND.Next(4);
+                            f.richTextBox1.Text += "New colour: " + selectedCard.colour + '\n';
                             break;
                         case Values.WildFour:
+                            // случайным образом задаётся цвет
                             selectedCard.colour = (Colours)RND.Next(4);
-                            dealer.players[number].hand.Add(dealer.deck.Peek());
-                            dealer.deck.Pop();
-                            dealer.players[number].hand.Add(dealer.deck.Peek());
-                            dealer.deck.Pop();
-                            dealer.players[number].hand.Add(dealer.deck.Peek());
-                            dealer.deck.Pop();
-                            dealer.players[number].hand.Add(dealer.deck.Peek());
-                            dealer.deck.Pop();
+                            f.richTextBox1.Text += "New colour: " + selectedCard.colour + '\n';
+                            // + штраф следующему игроку в 4 карты
+                            for (int i = 0; i < 3; i++)
+                            {
+                                dealer.players[number].hand.Add(dealer.deck.Peek());
+                                dealer.deck.Pop();
+                            }
                             break;
                         default:
                             break;
                     }
+                    // игрок кладёт свою карту в стопку 
                     dealer.pile.Push(selectedCard);
                     dealer.players[number].hand.Remove(selectedCard);
                 }
+                // и передаёт ход следующему
                 f.mhk.fl = false;
                 number = dealer.pass_course(forward, number);
                 f.clear_position();

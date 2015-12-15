@@ -88,7 +88,6 @@ namespace UNO_WinForms
             return new Point(12 + cardIndex * 28, 12 + playerIndex * 120);
         }
 
-
         private Image getImage(Card card)
             {
                 switch (card.value)
