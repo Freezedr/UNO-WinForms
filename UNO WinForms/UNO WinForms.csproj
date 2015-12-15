@@ -68,6 +68,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
@@ -82,6 +83,174 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue 0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue 3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue 4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue 5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue 6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue 7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue 8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue 9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue draw 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green 0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green 3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green 4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green 5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green 6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green 7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green 8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green 9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green draw 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red 0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red 3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red 4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red 5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red 6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red 7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red 8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red 9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red draw 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wild four.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wild.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow 0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow 3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow 4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow 5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow 6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow 7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow 8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow 9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow draw 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow reverse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

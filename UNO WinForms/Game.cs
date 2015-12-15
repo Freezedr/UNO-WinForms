@@ -24,11 +24,13 @@ namespace UNO_WinForms
         {
             number = 0;  // порядковый номер игрока
             bool forward = true; // направление игры
+            f.paint_position();
             MessageBox.Show("Включите СИМПР");
-            f.richTextBox1.Text += "Pile card: " + dealer.pile.ToString();
+            f.clear_position();
+            f.richTextBox1.Text += "Pile card: " + dealer.pile.Peek().ToString() + '\n';
             while (!dealer.gameFinished())
             {
-                //f.mhk.fl = false;
+                f.paint_position();
                 if (dealer.deck.Count == 0)
                     dealer.pileToDeck();
                 if ((dealer.deck.Count == 0) || (dealer.pile.Count == 0))
@@ -40,7 +42,6 @@ namespace UNO_WinForms
                 {
                     Application.DoEvents();
                 }
-                f.richTextBox1.Text += "СИМПР сделал выбор \n";
                 f.richTextBox1.Text += Data.str_buf;
                 Data.str_buf = "";
                 Card selectedCard = Data.selectedCard;
@@ -95,18 +96,11 @@ namespace UNO_WinForms
                     dealer.players[number].hand.Remove(selectedCard);
                 }
                 f.mhk.fl = false;
-                for (int i = 0; i < dealer.players.Count; i++)
-                {
-                    f.richTextBox1.Text += "\nPlayer " + i + " hand: \n\n";
-                    f.richTextBox1.Text += dealer.players[i].hand.Count.ToString() + "\n";
-                    for (int j = 0; j < dealer.players[i].hand.Count; j++)
-                    {
-                        Card curr = dealer.players[i].hand.ElementAt<Card>(j);
-                        f.richTextBox1.Text += curr.ToString() + "\n";
-                    }
-                }
                 number = dealer.pass_course(forward, number);
+                f.clear_position();
+                //f.paint_position();
             }
+            f.paint_position();
         }
 
         public void printDeck()
